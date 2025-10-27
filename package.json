@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "test": "sass --no-source-map --style=compressed style.sass public/style.css --watch"
+  }
+}
