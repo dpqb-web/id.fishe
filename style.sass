@@ -73,6 +73,9 @@ html
   @media (max-width: 480px)
     flex-direction: column-reverse
 
+b, strong
+  font-weight: 600
+
 a, :visited, :link, :any-link
   text-decoration: 1px dotted currentColor underline
   &:hover, &:focus
@@ -91,6 +94,7 @@ a, :visited, :link, :any-link
 nav
   background: #ccc
   text-align: center
+  overflow: hidden
   @media (prefers-color-scheme: dark)
     background: #333
   @media (min-width: 980px)
@@ -112,11 +116,11 @@ nav
       flex: row nowrap
       text-decoration: none !important
       min-width: 80px
-      padding: 10px 0
+      padding-block: 10px
       @media (max-width: 480px)
-        padding: 8px 0
+        padding-block: 5px
         min-width: none
-        gap: 4px
+        gap: 3px
         flex-direction: column
       &:hover, &:focus
         background: #0003
@@ -130,7 +134,7 @@ nav
           height: 24px
           margin: auto
     .aktif
-      font-weight: 600
+      // font-weight: 600
       background: #e6e6e6
       @media (prefers-color-scheme: dark)
         background: #1a1a1a

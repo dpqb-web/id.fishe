@@ -34,7 +34,6 @@ $menuItem = [
   <link rel="manifest" type="application/manifest+json" href="/site.webmanifest">
   <link rel="stylesheet" media="screen" href="/style.css">
   <title><?= $TEMPLATE['title'] ?> | Fishe</title>
-  <?= ($TEMPLATE['head']) ?? '' ?>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
@@ -54,6 +53,7 @@ $menuItem = [
       return false;
     }
   </script>
+  <?= ($TEMPLATE['head']) ?? '' ?>
 </head>
 
 <body>
@@ -73,6 +73,18 @@ $menuItem = [
         <?php endforeach; ?>
       </ul>
     </nav>
+    <?php if (isset($_COOKIE['pesan'])) : ?>
+      <div class="pesan2">
+        <?php foreach ($JenisPesan as $urutan => $jenis) : ?>
+          <?php foreach ($_COOKIE[$urutan] as $isi) : ?>
+            <div class="pesan <?= $jenis ?>">
+              <?= $isi ?>
+            </div>
+          <?php endforeach ?>
+        <?php endforeach ?>
+      </div>
+      <?php delCook('pesan') ?>
+    <?php endif ?>
     <main>
       <?= $TEMPLATE['main'] ?>
     </main>

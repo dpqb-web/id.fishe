@@ -1,13 +1,18 @@
 <?php
-$TEMPLATE = [];
-
-function render(bool $public = true) : void {
+function render(bool $public = true, string ...$addon) : string {
   global $TEMPLATE;
+  $locTMPL = __DIR__ . '/template/';
+
   ob_start();
-  if ($public) {
-    require __DIR__ . '/template/public.php';
-  } else {
-    require __DIR__ . '/template/private.php';
+  if ($addon) {
+    foreach ($addon as $x) {
+      require $locTMPL . $x . '.php';
+    }
   }
-  echo ob_get_clean();
+  if ($public) {
+    require $locTMPL . 'public.php';
+  } else {
+    require $locTMPL . 'private.php';
+  }
+  return ob_get_clean();
 }
