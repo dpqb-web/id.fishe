@@ -2,14 +2,9 @@
 session_start();
 
 function periksaMasuk() : bool {
-  if (empty($_SESSION['username']) || empty($_SESSION['fullname'])) {
-    return false;
-  }
-  return true;
+  return (empty($_SESSION['username'])) ? false : true;
 }
 
 function masukDulu() : void {
-  if (periksaMasuk()) {
-    ke('login.php');
-  }
+  if (periksaMasuk()) ke('auth.php');
 }

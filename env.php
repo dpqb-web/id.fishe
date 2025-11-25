@@ -13,7 +13,11 @@
 // demo
 $DB = [
   'TYPE' => 'sqlite',
-  'ARGS' => __DIR__ .'/'. 'db.sqlite',
+  'ARGS' => __DIR__ .'/db.sqlite',
   'USER' => null,
   'PASS' => null
+];
+
+$DIR = [
+  'STORAGE' => __DIR__ .'/storage/'
 ];

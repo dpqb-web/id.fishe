@@ -1,26 +1,40 @@
 <?php
-require_once __DIR__ . '/../index.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../index.php';
 
-$TEMPLATE['title'] = 'Beranda';
-$TEMPLATE['description'] = 'Selamat datang di situs web contoh yang dibuat dengan Fishe Framework.';
-
-buatPesan(0, 'tes');
+$Template['title'] = 'Beranda';
+$Template['description'] = '.';
 
 ob_start();
 ?>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('nav a[href="/"]').classList.add('aktif');
-  });
-</script>
+<style media="screen">
+  header {
+    display: none;
+  }
+</style>
+<style media="screen and (max-width: 480px)">
+  header {
+    display: block;
+  }
+</style>
 <?php
-$TEMPLATE['head'] = ob_get_clean();
+$Template['head'] = ob_get_clean();
 
 ob_start();
 ?>
-<?= var_dump($_COOKIE) ?>
+<form action="/" method="get">
+  <input type="search" name="cari" placeholder="Cari barang..." value="<?= htmlspecialchars($_GET['cari'] ?? '') ?>" autocomplete="off">
+  <button type="submit">
+    <img src="/assets/img/bx/bx-search-alt.svg" alt="Cari" class="mono">
+  </button>
+</form>
 <?php
-$TEMPLATE['main'] = ob_get_clean();
+$Template['header'] = ob_get_clean();
 
-echo render();
+ob_start();
+?>
+<section></section>
+<?php
+$Template['main'] = ob_get_clean();
+
+echo RenderTemplate();
 ?>

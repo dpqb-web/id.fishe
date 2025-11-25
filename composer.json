@@ -3,10 +3,6 @@
     "test": [
       "Composer\\Config::disableProcessTimeout",
       "@php -S 0.0.0.0:8080 -t public"
-    ],
-    "admin": [
-      "Composer\\Config::disableProcessTimeout",
-      "@php -S localhost:8080 -t private"
     ]
   }
 }

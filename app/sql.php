@@ -10,4 +10,5 @@ $SQL = new PDO($DB['TYPE'] .':'. $DB['ARGS'], $DB['USER'], $DB['PASS'], [
 
 if ($DB['TYPE'] == 'sqlite') {
     $SQL->exec(file_get_contents(__DIR__ . '/new.sql'));
+    // $SQL->exec(file_get_contents(__DIR__ . '/demo.sql'));
 }

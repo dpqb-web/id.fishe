@@ -4,6 +4,6 @@ function ke(string $tujuan = '') : void {
   exit();
 }
 
-foreach (['cookies', 'session', 'sql', 'template'] as $x) {
+foreach (['cookies', 'form', 'session', 'sql', 'template', 'random'] as $x) {
   require_once __DIR__ . '/' . $x . '.php';
 }
