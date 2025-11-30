@@ -4,10 +4,10 @@ $meta = [
   'description' => ($Template['description']) ?? 'Aplikasi Fishé.',
   'author' => 'Singgih Budi Utomo, Muhammad Ivan Affandi, Muhammad Rizki Fauzan',
   'application-name' => 'Fishé',
-  'theme-color' => '#ffffff',
-  'color-scheme' => 'light dark',
-  'apple-mobile-web-app-capable' => 'yes',
-  'apple-mobile-web-app-status-bar-style' => 'black-translucent'
+  'theme-color' => '#e6e6e6',
+  'color-scheme' => 'only light',
+  // 'apple-mobile-web-app-capable' => 'yes',
+  // 'apple-mobile-web-app-status-bar-style' => 'black-translucent'
 ];
 $icon = [16, 24, 32, 48, 180, 256, 512, 1024];
 ?>
@@ -29,8 +29,6 @@ $icon = [16, 24, 32, 48, 180, 256, 512, 1024];
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/icon-180.png">
   <link rel="manifest" type="application/manifest+json" href="/assets/site.webmanifest">
   <link rel="stylesheet" media="screen" href="/assets/style.css">
-  <link rel="stylesheet" media="screen and (max-width: 480px)" href="/assets/mobile.css">
-  <!-- <link rel="stylesheet" media="screen" href="/assets/dark.css"> -->
   <title><?= $Template['title'] ?> | Fishé</title>
   <script src="/assets/pre.js"></script>
   <script src="/assets/post.js"></script>
@@ -39,7 +37,7 @@ $icon = [16, 24, 32, 48, 180, 256, 512, 1024];
 
 <body>
   <main>
-    <nav class="desktop">
+    <nav>
       <div class="kiri">
         <a href="/">
           <img src="/assets/img/logo.svg" alt="Fishé" class="mono">
@@ -66,44 +64,13 @@ $icon = [16, 24, 32, 48, 180, 256, 512, 1024];
       </div>
     </nav>
     <header>
-      <?= $Template['header'] ?? '' ?>
+      <?= $Template['header'] ?>
     </header>
     <div class="content">
       <?= $Template['main'] ?>
     </div>
-    <nav class="mobile">
-      <ul>
-        <li>
-          <a href="/">
-            <img src="/assets/img/bx/bxs-home.svg" alt="Beranda" class="mono">
-          </a>
-        </li>
-        <li>
-          <a href="/?cari">
-            <img src="/assets/img/bx/bx-search-alt.svg" alt="Cari" class="mono">
-          </a>
-        </li>
-        <?php if (periksaMasuk()) : ?>
-          <li>
-            <a href="/cart.php">
-              <img src="/assets/img/bx/bxs-cart.svg" alt="Keranjang" class="mono">
-            </a>
-          </li>
-          <li>
-            <a href="/user/transaksi.php">
-              <img src="/assets/img/bx/bxs-receipt.svg" alt="Transaksi" class="mono">
-            </a>
-          </li>
-        <?php endif ?>
-        <li>
-          <a href="/user.php">
-            <img src="/assets/img/bx/bxs-user.svg" alt="Pengguna" class="mono">
-          </a>
-        </li>
-      </ul>
-    </nav>
     <footer>
-      &copy; <?= date('Y') ?> <?= $meta['author'] ?>.
+      <p>v0.1&alpha; &copy; <?= date('Y') ?> <?= $meta['author'] ?>.</p>
     </footer>
   </main>
   <?php if (isset($_COOKIE['pesan'])) : ?>

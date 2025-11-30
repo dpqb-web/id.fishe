@@ -2,9 +2,9 @@
 session_start();
 
 function periksaMasuk() : bool {
-  return (empty($_SESSION['username'])) ? false : true;
+  return !empty($_SESSION['username']);
 }
 
 function masukDulu() : void {
-  if (periksaMasuk()) ke('auth.php');
+  if (!periksaMasuk()) ke('auth.php');
 }

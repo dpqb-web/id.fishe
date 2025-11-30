@@ -20,8 +20,15 @@ document.addEventListener 'DOMContentLoaded', ->
         pesan.induk.remove() if pesan.induk.children.length is 0
 
   dialog =
+    sumber: document.querySelectorAll 'a[data-modal]'
     induk: document.querySelectorAll '.modal'
     tutup: document.querySelectorAll '.modal button[data-aksi="tutup"]'
+  if dialog.sumber?
+    dialog.sumber.forEach (link) ->
+      tujuan = link.dataset.modal
+      link.addEventListener 'click', (e) ->
+        cancel e
+        document.getElementById(tujuan).hidden = false
   if dialog.induk?
     dialog.induk.forEach (modal) ->
       modal.addEventListener 'click', (e) ->

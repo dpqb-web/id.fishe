@@ -10,6 +10,15 @@ if ($act === 'keluar') {
   }
   ke();
 }
+if ($act === 'hapus') {
+  if (periksaMasuk()) {
+    $prep = $SQL->prepare('DELETE FROM `pengguna` WHERE `username` = ? LIMIT 1');
+    $prep->execute([$_SESSION['username']]);
+    session_destroy();
+    pesan(1, 'Akun Anda telah dihapus.');
+  }
+  ke();
+}
 
 if (periksaMasuk()) ke();
 
