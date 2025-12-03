@@ -2,7 +2,8 @@
   "scripts": {
     "sass": "npx sass -w --no-source-map --style=compressed static:public/assets",
     "coffee": "npx coffee -cwb -o public/assets static",
-    "test": "npx conc --kill-others npm:sass npm:coffee"
+    "php": "php -S localhost:8080 -t public",
+    "test": "npx conc --kill-others npm:sass npm:coffee npm:php"
   },
   "devDependencies": {
     "coffeescript": "^2.7.0",

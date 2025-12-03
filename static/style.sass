@@ -31,7 +31,7 @@ a, :visited, :link, :any-link
 
 p
   margin-block: 1em
-  text-indent: 1em
+  // text-indent: 1em
 
 ul, ol, menu
   padding-inline-start: 1.3em
@@ -68,7 +68,7 @@ a, :visited, :link, :any-link
 @for $x from 1 through 6
   h#{$x}
     font-weight: 200
-    margin-block: 1rem
+    // margin-block: 1rem
     line-height: 1.2
 
 button, select
@@ -77,7 +77,7 @@ button, select
   border: 1px solid #7f7f7f
 
 ::selection
-  background: #1a1a1a
+  background: #1a7fe6
   color: #fff
 
 main nav, .pesan2 section, .modal section
@@ -133,6 +133,45 @@ main
     display: flex
     flex: 1
     flex-flow: column nowrap
+    section
+      padding: 10px
+      margin-block: 10px
+      &.box
+        background: #fff
+        border: 1px solid #ccc
+        border-radius: 5px
+      &.book
+        padding: 0
+        display: flex
+        flex-flow: row nowrap
+        > *
+          padding: 10px
+        .main
+          flex: 1
+          background: #fff
+          box-shadow: 0 1px #1a1a1a7f
+          border-radius: 5px 0 0 5px
+        .sidebar
+          width: 240px
+          background: #ccc
+          border-radius: 0 5px 5px 0
+          ul.nav
+            list-style: none
+            padding: 0
+            li
+              display: contents
+              a
+                display: block
+                padding: 10px
+                margin-inline-start: -10px
+                border-block: 1px solid #bbb
+                &.aktif
+                  // font-weight: 600
+                  background: #fff
+                  box-shadow: 0 1px #1a1a1a7f
+                  border: 0
+                  border-radius: 0 5px 5px 0
+                  text-decoration: none !important
 
   footer
     text-align: center
@@ -140,6 +179,19 @@ main
       margin-block-start: 0
     :last-child
       margin-block-end: 0
+
+.petak
+  display: flex
+  flex-flow: row wrap
+  margin-inline: -10px
+  > *
+    margin: 10px
+    width: 220px
+  .barang
+    img
+      aspect-ratio: 1
+      width: 100%
+      object-position: center
 
 .pesan2
   position: fixed

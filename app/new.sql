@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS 'pengikut' (
 );
 CREATE TABLE IF NOT EXISTS 'barang' (
   'ID' VARCHAR(255) PRIMARY KEY,
-  'judul' TEXT,
+  'nama' TEXT,
   'harga' UNSIGNED BIGINT DEFAULT 0,
   'pemilik' VARCHAR(255),
   'keterangan' LONGTEXT,

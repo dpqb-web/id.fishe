@@ -1,27 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../index.php';
 
-$act = $_GET['act'] ?? 'masuk';
-
-if ($act === 'keluar') {
-  if (periksaMasuk()) {
-    session_destroy();
-    pesan(1, 'Anda telah keluar dari akun Anda.');
-  }
-  ke();
-}
-if ($act === 'hapus') {
-  if (periksaMasuk()) {
-    $prep = $SQL->prepare('DELETE FROM `pengguna` WHERE `username` = ? LIMIT 1');
-    $prep->execute([$_SESSION['username']]);
-    session_destroy();
-    pesan(1, 'Akun Anda telah dihapus.');
-  }
-  ke();
-}
-
-if (periksaMasuk()) ke();
-
 if (isset($_POST['act'])) {
   $input = new Form($_POST);
   $input->del('act');
@@ -82,7 +61,27 @@ if (isset($_POST['act'])) {
     }
     ke('auth.php?act=masuk');
   }
+  if ($_POST['act'] === 'keluar') {
+    if (periksaMasuk()) {
+      session_destroy();
+      pesan(1, 'Anda telah keluar dari akun Anda.');
+    }
+    ke();
+  }
+  if ($_POST['act'] === 'hapus') {
+    if (periksaMasuk()) {
+      $prep = $SQL->prepare('DELETE FROM `pengguna` WHERE `username` = ? LIMIT 1');
+      $prep->execute([$_SESSION['username']]);
+      session_destroy();
+      pesan(1, 'Akun Anda telah dihapus.');
+    }
+    ke();
+  }
 }
+
+if (periksaMasuk()) ke();
+
+$act = $_GET['act'] ?? 'masuk';
 
 // halaman
 
@@ -94,12 +93,6 @@ $Template['description'] = match ($act) {
   'daftar' => '',
   default => ''
 };
-
-ob_start();
-?>
-<h1 class="tengah"><?= ($act === 'daftar') ? 'Daftar' : 'Masuk' ?></h1>
-<?php
-$Template['header'] = ob_get_clean();
 
 ob_start();
 ?>

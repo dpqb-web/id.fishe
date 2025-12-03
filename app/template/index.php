@@ -51,10 +51,10 @@ $icon = [16, 24, 32, 48, 180, 256, 512, 1024];
       </div>
       <div class="kanan">
         <?php if (periksaMasuk()) : ?>
-          <a href="/cart.php">
+          <a href="/keranjang.php">
             <img src="/assets/img/bx/bxs-cart.svg" alt="Keranjang" class="mono">
           </a>
-          <a href="/user.php">
+          <a href="/pengguna.php">
             <img src="/assets/img/bx/bxs-user.svg" alt="Pengguna" class="mono">
           </a>
         <?php else : ?>
@@ -63,9 +63,6 @@ $icon = [16, 24, 32, 48, 180, 256, 512, 1024];
         <?php endif ?>
       </div>
     </nav>
-    <header>
-      <?= $Template['header'] ?>
-    </header>
     <div class="content">
       <?= $Template['main'] ?>
     </div>

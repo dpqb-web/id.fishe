@@ -19,5 +19,5 @@ $DB = [
 ];
 
 $DIR = [
-  'STORAGE' => __DIR__ .'/storage/'
+  'STORAGE' => __DIR__ . '/public/storage/'
 ];

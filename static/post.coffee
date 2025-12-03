@@ -6,9 +6,9 @@ document.addEventListener 'DOMContentLoaded', ->
     .filter Boolean
     .pop() ###
 
-  menu =
+  ### menu =
     aktif: document.querySelector "nav.mobile a[href='" + window.location.pathname + "']"
-  menu.aktif.classList.add 'aktif' if menu.aktif?
+  menu.aktif.classList.add 'aktif' if menu.aktif? ###
 
   pesan =
     induk: document.querySelector '.pesan2'
@@ -20,7 +20,7 @@ document.addEventListener 'DOMContentLoaded', ->
         pesan.induk.remove() if pesan.induk.children.length is 0
 
   dialog =
-    sumber: document.querySelectorAll 'a[data-modal]'
+    sumber: document.querySelectorAll '[data-modal]'
     induk: document.querySelectorAll '.modal'
     tutup: document.querySelectorAll '.modal button[data-aksi="tutup"]'
   if dialog.sumber?
