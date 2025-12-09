@@ -2,12 +2,14 @@ CREATE TABLE IF NOT EXISTS 'pengguna' (
   'username' VARCHAR(255) PRIMARY KEY,
   'fullname' TEXT,
   'password' TEXT,
-  'penjual' BOOLEAN DEFAULT FALSE
+  'penjual' BOOLEAN DEFAULT FALSE,
+  'waktu' DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE IF NOT EXISTS 'pengikut' (
   -- 'ID' INT PRIMARY KEY AUTO_INCREMENT, -- MySQL/MariaDB
   'mengikuti' VARCHAR(255),
   'diikuti' VARCHAR(255),
+  'waktu' DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY ('mengikuti') REFERENCES 'pengguna'('username'),
   FOREIGN KEY ('diikuti') REFERENCES 'pengguna'('username')
 );
@@ -17,6 +19,8 @@ CREATE TABLE IF NOT EXISTS 'barang' (
   'harga' UNSIGNED BIGINT DEFAULT 0,
   'pemilik' VARCHAR(255),
   'keterangan' LONGTEXT,
+  'waktu' DATETIME DEFAULT CURRENT_TIMESTAMP,
+  -- 'waktu_diubah' DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY ('pemilik') REFERENCES 'pengguna'('username')
 );
 CREATE TABLE IF NOT EXISTS 'keranjang' (
@@ -24,15 +28,16 @@ CREATE TABLE IF NOT EXISTS 'keranjang' (
   'pembeli' VARCHAR(255),
   'barang' VARCHAR(255),
   'jumlah' UNSIGNED INT DEFAULT 1,
+  'waktu' DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY ('pembeli') REFERENCES 'pengguna'('username'),
   FOREIGN KEY ('barang') REFERENCES 'barang'('ID')
 );
-CREATE TABLE IF NOT EXISTS 'transaksi' (
+CREATE TABLE IF NOT EXISTS 'pesanan' (
   -- 'ID' INT PRIMARY KEY AUTO_INCREMENT, -- MySQL/MariaDB
   'pembeli' VARCHAR(255),
   'barang' VARCHAR(255),
   'jumlah' UNSIGNED INT DEFAULT 1,
-  'tanggal' DATETIME DEFAULT CURRENT_TIMESTAMP,
+  'waktu' DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY ('pembeli') REFERENCES 'pengguna'('username'),
   FOREIGN KEY ('barang') REFERENCES 'barang'('ID')
 );
@@ -42,6 +47,8 @@ CREATE TABLE IF NOT EXISTS 'ulasan' (
   'barang' VARCHAR(255),
   'bintang' UNSIGNED TINYINT,
   'komentar' TEXT,
+  'waktu' DATETIME DEFAULT CURRENT_TIMESTAMP,
+  -- 'waktu_diubah' DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY ('pembeli') REFERENCES 'pengguna'('username'),
   FOREIGN KEY ('barang') REFERENCES 'barang'('ID')
 );

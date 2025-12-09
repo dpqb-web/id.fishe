@@ -3,13 +3,16 @@ class Form
 {
   private array $input;
 
-  function __construct(array $input)
+  function __construct(array $input, string $trigger_key = '')
   {
     $this->input = $input;
+    if ($trigger_key) {
+      $this->del($trigger_key);
+    }
   }
-  public function get(string $kunci = '') : mixed
+  public function get(string $keys = '') : mixed
   {
-    return empty($kunci) ? $this->input : ($this->input[$kunci] ?? null);
+    return empty($keys) ? $this->input : ($this->input[$keys] ?? null);
   }
   public function set(string $var, mixed $value) : void
   {
@@ -30,9 +33,9 @@ class Form
       }
     }
   }
-  public function san(int $type, string ...$kunci) : void
+  public function san(int $type, string ...$keys) : void
   {
-    foreach ($kunci as $k) {
+    foreach ($keys as $k) {
       if (isset($this->input[$k])) {
         // FILTER_SANITIZE_STRING || FILTER_SANITIZE_STRIPPED
         if ($type == 513) {
@@ -43,17 +46,17 @@ class Form
       }
     }
   }
-  /* public function sanStr(string ...$kunci) : void
+  public function sanStr(string ...$keys) : void
   {
-    foreach ($kunci as $k) {
+    foreach ($keys as $k) {
       if (isset($this->input[$k])) {
         $this->input[$k] = htmlspecialchars($this->input[$k]);
       }
     }
-  } */
-  /* public function sanBool(string ...$kunci) : void
+  }
+  /* public function sanBool(string ...$keys) : void
   {
-    foreach ($kunci as $k) {
+    foreach ($keys as $k) {
       if (isset($this->input[$k]))
         $this->input[$k] = (int) filter_var($this->input[$k], FILTER_VALIDATE_BOOL);
     }
@@ -75,7 +78,7 @@ class Form
   }
   public function bind(PDOStatement $prep) : void
   {
-    foreach ($this->input as $kunci => $isi) {
+    foreach ($this->input as $keys => $isi) {
       $jenis = match (gettype($isi)) {
         'boolean' => PDO::PARAM_BOOL,
         'integer' => PDO::PARAM_INT,
@@ -83,7 +86,7 @@ class Form
         default => PDO::PARAM_STR
       };
 
-      $prep->bindValue($kunci, $isi, $jenis);
+      $prep->bindValue($keys, $isi, $jenis);
     }
   }
 }

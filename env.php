@@ -1,4 +1,11 @@
 <?php
+$DIR = [
+  'DATABASE' => __DIR__ . '/db/',
+  'MODULE' => __DIR__ . '/module/',
+  'STORAGE' => __DIR__ . '/storage/',
+  'TEMPLATE' => __DIR__ . '/app/template/'
+];
+
 // $DB = [
 //   'TYPE' => 'mysql',
 //   'OPTS' => [
@@ -13,11 +20,7 @@
 // demo
 $DB = [
   'TYPE' => 'sqlite',
-  'ARGS' => __DIR__ .'/db.sqlite',
+  'ARGS' => $DIR['DATABASE'] .'db.sqlite',
   'USER' => null,
   'PASS' => null
-];
-
-$DIR = [
-  'STORAGE' => __DIR__ . '/public/storage/'
 ];

@@ -1,11 +1,8 @@
 node_modules
 package-lock.json
 
-**.sqlite
-
 public/**/**.css
 public/**/**.js
-private/**/**.css
-private/**/**.js
-**/site.webmanifest
 public/storage
+public/static
+**/site.webmanifest

@@ -1,7 +1,8 @@
 - [x] CRUD pengguna
 - [x] CRUD barang
-- [ ] CRUD keranjang
-- [ ] CRUD ulasan
-- [ ] R cari
+- [x] CRUD keranjang
+- [x] CRUD ulasan
+- [x] R cari
 
+- [ ] laporan penjual
 - [ ] rapikan

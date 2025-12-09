@@ -146,5 +146,5 @@ ob_start();
 <?php
 $Template['main'] = ob_get_clean();
 
-echo RenderTemplate();
+require_once $DIR['TEMPLATE'] . 'index.php';
 ?>

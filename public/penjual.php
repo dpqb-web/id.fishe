@@ -4,20 +4,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../index.php';
 if (empty($_GET['id'])) masukDulu();
 
 if (periksaMasuk()) {
-  if (!empty($_POST['penjual'])) {
-    $input = new Form($_POST);
-    $input->set('username', htmlspecialchars($_SESSION['username']));
-    $input->san(FILTER_VALIDATE_BOOL, 'penjual');
-    $prep = $SQL->prepare('UPDATE `pengguna` SET `penjual` = :penjual WHERE `username` = :username');
-    $input->bind($prep);
-    $prep->execute();
-    if ($input->get('penjual')) {
-      pesan(0, 'Anda telah menjadi penjual.');
-    } else {
-      pesan(1, 'Anda telah keluar dari menjadi penjual.');
-    }
-    ke('pengguna.php');
-  }
   if (isset($_POST['ikuti']) && !empty($_GET['id'])) {
     $input = new Form($_POST);
     $input->del('ikuti');
@@ -162,20 +148,8 @@ ob_start();
       <?php endif ?>
       <div class="petak">
         <?php if ($barang2) : ?>
-          <?php foreach ($barang2 as $b) : ?>
-            <div class="barang">
-              <a href="/barang.php?id=<?= $b['ID'] ?>">
-                <img src="/storage/barang/<?= $b['ID'] ?>.webp" alt="<?= htmlspecialchars($b['nama']) ?>">
-                <div class="info">
-                  <h3><?= htmlspecialchars($b['nama']) ?></h3>
-                  <p class="harga">Rp<?= number_format($b['harga'], 0, ',', '.') ?></p>
-                </div>
-              </a>
-              <?php if (!$orangLain) : ?>
-                <a href="#ubah/<?= $b['ID'] ?>" data-modal="ubah">Ubah</a>
-                <a href="#hapus/<?= $b['ID'] ?>" data-modal="hapus">Hapus</a>
-              <?php endif ?>
-            </div>
+          <?php foreach ($barang2 as $buah) : ?>
+            <?php include $DIR['TEMPLATE'] . 'buah.barang.php' ?>
           <?php endforeach ?>
         <?php else : ?>
           <p class="tengah">Penjual ini belum memiliki barang.</p>
@@ -185,7 +159,7 @@ ob_start();
   </div>
   <div class="sidebar">
     <header>
-      <h1><?= $user['fullname'] ?></h1>
+      <h1 title="<?= $user['fullname'] ?>"><?= $user['fullname'] ?></h1>
       <p>@<?= htmlspecialchars($user['username']) ?></p>
       <p><?= $mengikuti ?> pengikut</p>
       <?php if ($orangLain) : ?>
@@ -315,14 +289,15 @@ ob_start();
   </div>
   <pre id="data-barang" hidden><?= htmlspecialchars(json_encode($barang2)) ?></pre>
   <script>
-    var dataBarang = JSON.parse(document.getElementById('data-barang').textContent);
-    document.getElementById('data-barang').remove();
+    var DOMDataBarang = document.getElementById('data-barang');
+    var dataBarang = JSON.parse(DOMDataBarang.textContent);
+    DOMDataBarang.remove();
+    DOMDataBarang = undefined;
 
-    var linkUbah = document.querySelectorAll('a[data-modal="ubah"]');
-    linkUbah.forEach(function(el) {
+    document.querySelectorAll('button[data-modal="ubah"]').forEach(function(el) {
       el.addEventListener('click', function(e) {
         e.preventDefault();
-        var idBarang = this.getAttribute('href').split('/')[1];
+        var idBarang = this.closest('.barang').getAttribute('data-id');
         var barang = dataBarang.find(function(b) {
           return b.ID === idBarang;
         });
@@ -336,11 +311,10 @@ ob_start();
       });
     });
 
-    var linkHapus = document.querySelectorAll('a[data-modal="hapus"]');
-    linkHapus.forEach(function(el) {
+    document.querySelectorAll('button[data-modal="hapus"]').forEach(function(el) {
       el.addEventListener('click', function(e) {
         e.preventDefault();
-        var idBarang = this.getAttribute('href').split('/')[1];
+        var idBarang = this.closest('.barang').getAttribute('data-id');
         var barang = dataBarang.find(function(b) {
           return b.ID === idBarang;
         });
@@ -355,5 +329,5 @@ ob_start();
 <?php
 $Template['foot'] = ob_get_clean();
 
-echo RenderTemplate();
+require_once $DIR['TEMPLATE'] . 'index.php';
 ?>

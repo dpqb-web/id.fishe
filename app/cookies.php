@@ -17,20 +17,20 @@ function pesan(int $jenis, string $isi): void
   $jumlah++;
 }
 
-/* class Pesan
+class Notification
 {
-  public const array jenis = ['berhasil', 'keterangan', 'peringatan', 'galat'];
-  private int $jumlah = 0;
+  public const string keyName = 'Notification';
+  public const array type = ['success', 'information', 'warning', 'error'];
+  private int $count = 0;
 
-  public function set(int $jenis, string $isi) : void
+  public function add(int $type, string $content) : void
   {
-    setcookie("pesan[$this->jumlah][0]", $jenis, time() + 1);
-    setcookie("pesan[$this->jumlah][1]", $isi, time() + 1);
-    $this->jumlah++;
+    setcookie(self::keyName ."[$this->count][0]", $type, time() + 1);
+    setcookie(self::keyName ."[$this->count][1]", $content, time() + 1);
+    $this->count++;
   }
   public function delAll() : void
   {
     delCook('pesan');
   }
 }
-$Pesan = new Pesan; */

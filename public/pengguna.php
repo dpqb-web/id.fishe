@@ -3,6 +3,21 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../index.php';
 
 masukDulu();
 
+if (!empty($_POST['penjual'])) {
+  $input = new Form($_POST);
+  $input->set('username', htmlspecialchars($_SESSION['username']));
+  $input->san(FILTER_VALIDATE_BOOL, 'penjual');
+  $prep = $SQL->prepare('UPDATE `pengguna` SET `penjual` = :penjual WHERE `username` = :username');
+  $input->bind($prep);
+  $prep->execute();
+  if ($input->get('penjual')) {
+    pesan(0, 'Anda telah menjadi penjual.');
+  } else {
+    pesan(1, 'Anda telah keluar dari menjadi penjual.');
+  }
+  ke('pengguna.php');
+}
+
 $prep = $SQL->prepare('SELECT * FROM `pengguna` WHERE `username` = ? LIMIT 1');
 $prep->execute([($_SESSION['username'])]);
 $user = $prep->fetch();
@@ -91,5 +106,5 @@ ob_start();
 <?php
 $Template['foot'] = ob_get_clean();
 
-echo RenderTemplate();
+require_once $DIR['TEMPLATE'] . 'index.php';
 ?>
